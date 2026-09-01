@@ -95,7 +95,7 @@ export async function getProducts(params?: Record<string, string>) {
   const total = count ?? 0;
   return {
     success: true,
-    data: uniqueProducts(data || []).map((row) => mapProduct(row as Record<string, unknown>)),
+data: uniqueProducts(data || []).map((row) => mapProduct(row as Record<string, unknown>)),
     pagination: {
       page,
       limit,
