@@ -24,6 +24,20 @@ function mapProduct(row: Record<string, unknown>): Product {
   };
 }
 
+function uniqueProducts(rows: Record<string, unknown>[]): Record<string, unknown>[] {
+  const seen = new Set<string>();
+  const out: Record<string, unknown>[] = [];
+  for (const row of rows) {
+    const key = [row.name, row.model, row.storage, row.category, row.price]
+      .map((v) => String(v ?? ''))
+      .join('|');
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(row);
+  }
+  return out;
+}
+
 function mapOrder(row: Record<string, unknown>): Order {
   return {
     id: Number(row.id),
@@ -105,7 +119,10 @@ export async function getFeaturedProducts() {
     .eq('featured', true)
     .order('created_at', { ascending: false });
   if (error) fail(error);
-  return { success: true, data: (data || []).map((row) => mapProduct(row as Record<string, unknown>)) };
+  return {
+    success: true,
+    data: uniqueProducts(data || []).map((row) => mapProduct(row as Record<string, unknown>)),
+  };
 }
 
 export async function getProductsByCategory(category: string) {
@@ -116,7 +133,10 @@ export async function getProductsByCategory(category: string) {
     .order('featured', { ascending: false })
     .order('price', { ascending: true });
   if (error) fail(error);
-  return { success: true, data: (data || []).map((row) => mapProduct(row as Record<string, unknown>)) };
+  return {
+    success: true,
+    data: uniqueProducts(data || []).map((row) => mapProduct(row as Record<string, unknown>)),
+  };
 }
 
 export async function getModels() {
