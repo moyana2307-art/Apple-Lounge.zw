@@ -145,7 +145,7 @@ export default function CheckoutForm() {
               value={form.phone}
               onChange={(e) => updateField('phone', e.target.value)}
               required
-              placeholder="+263 77 123 4567"
+              placeholder="+263 786 798 209"
               className="w-full px-4 py-3 bg-neutral-100 rounded-2xl text-sm text-apple-dark placeholder:text-neutral-400 outline-none focus:ring-2 focus:ring-apple-blue focus:ring-offset-0 transition-all duration-200"
             />
           </div>

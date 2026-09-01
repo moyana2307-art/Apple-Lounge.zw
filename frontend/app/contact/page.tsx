@@ -5,14 +5,24 @@ import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, MessageCircle, Send, Loader2 } from 'lucide-react';
 import { generateWhatsAppUrl } from '@/lib/utils';
 
-const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '263771234567';
+const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '263786798209';
+
+const whatsappUrl = generateWhatsAppUrl(whatsappPhone, 'Hello Apple Lounge! I need assistance.');
 
 const contactMethods = [
   {
+    icon: MessageCircle,
+    label: 'WhatsApp',
+    value: '+263 786 798 209',
+    href: whatsappUrl,
+    description: 'Fastest way to reach us',
+    primary: true,
+  },
+  {
     icon: Phone,
     label: 'Phone',
-    value: '+263 77 123 4567',
-    href: 'tel:+263771234567',
+    value: '+263 786 798 209',
+    href: 'tel:+263786798209',
     description: 'Call us directly',
   },
   {
@@ -20,14 +30,7 @@ const contactMethods = [
     label: 'Email',
     value: 'info@apparelounge.co.zw',
     href: 'mailto:info@apparelounge.co.zw',
-    description: 'Send us an email',
-  },
-  {
-    icon: MessageCircle,
-    label: 'WhatsApp',
-    value: '+263 77 123 4567',
-    href: generateWhatsAppUrl(whatsappPhone, 'Hello Apple Lounge! I need assistance.'),
-    description: 'Chat instantly',
+    description: 'We reply fastest on WhatsApp',
   },
   {
     icon: MapPin,

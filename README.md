@@ -63,7 +63,7 @@ Copy `frontend/.env.example` to `frontend/.env.local` and set:
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-NEXT_PUBLIC_WHATSAPP_NUMBER=263771234567
+NEXT_PUBLIC_WHATSAPP_NUMBER=263786798209
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 

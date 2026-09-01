@@ -65,7 +65,7 @@ const sections = [
     content: `For questions about these Terms of Service, please contact us at:
 
 Email: info@apparelounge.co.zw
-Phone: +263 77 123 4567
+Phone: +263 786 798 209
 Location: Victoria Falls, Zimbabwe`,
   },
 ];

@@ -18,7 +18,7 @@ const models = [
 ];
 
 const whatsappUrl = generateWhatsAppUrl(
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '263771234567',
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '263786798209',
   'Hello Apple Lounge! I would like to inquire about your products.'
 );
 
@@ -65,8 +65,8 @@ export default function Footer() {
             <h3 className="text-[11px] font-semibold text-[#86868B] uppercase tracking-widest mb-4">Contact</h3>
             <ul className="space-y-2.5">
               <li>
-                <a href="tel:+263771234567" className="text-[13px] text-[#86868B] hover:text-white transition-colors duration-200">
-                  +263 77 123 4567
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-[13px] text-[#86868B] hover:text-[#25D366] transition-colors duration-200">
+                  +263 786 798 209
                 </a>
               </li>
               <li>

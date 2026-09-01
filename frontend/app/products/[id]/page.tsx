@@ -22,7 +22,7 @@ export default function ProductDetailPage() {
   const [selectedColor, setSelectedColor] = useState('');
   const [addedToCart, setAddedToCart] = useState(false);
 
-  const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '263771234567';
+  const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '263786798209';
 
   useEffect(() => {
     if (!params.id) return;

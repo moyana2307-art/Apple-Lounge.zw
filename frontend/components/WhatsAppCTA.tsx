@@ -5,7 +5,7 @@ import { MessageCircle } from 'lucide-react';
 import { generateWhatsAppUrl } from '@/lib/utils';
 
 export default function WhatsAppCTA() {
-  const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '263771234567';
+  const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '263786798209';
   const message = 'Hello Apple Lounge! I would like to inquire about your products.';
   const url = generateWhatsAppUrl(phone, message);
 
@@ -45,9 +45,9 @@ export default function WhatsAppCTA() {
             Chat on WhatsApp
           </motion.a>
 
-          <p className="text-[13px] text-[#86868B]/50 mt-6">
-            +263 77 123 4567 &middot; Usually replies within minutes
-          </p>
+          <a href={url} target="_blank" rel="noopener noreferrer" className="text-[13px] text-[#86868B]/50 mt-6 inline-block hover:text-[#25D366] transition-colors">
+            +263 786 798 209 &middot; Usually replies within minutes
+          </a>
         </motion.div>
       </div>
     </section>

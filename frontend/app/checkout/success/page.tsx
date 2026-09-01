@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { CheckCircle, ShoppingBag, MessageCircle } from 'lucide-react';
 import { generateWhatsAppUrl } from '@/lib/utils';
 
-const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '263771234567';
+const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '263786798209';
 
 export default function CheckoutSuccessPage() {
   const searchParams = useSearchParams();

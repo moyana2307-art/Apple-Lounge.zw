@@ -153,7 +153,7 @@ export default function Navbar() {
 
               <div className="absolute bottom-0 left-0 right-0 p-5 border-t border-black/[0.06]">
                 <a
-                  href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '263771234567'}`}
+                  href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '263786798209'}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full text-center bg-[#1d1d1f] text-white text-[13px] font-medium py-2.5 rounded-full hover:bg-black transition-colors"

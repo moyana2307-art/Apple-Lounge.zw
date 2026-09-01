@@ -59,7 +59,7 @@ This information is necessary to process and deliver your order. We do not store
     content: `If you have any questions about this Privacy Policy, please contact us at:
 
 Email: info@apparelounge.co.zw
-Phone: +263 77 123 4567
+Phone: +263 786 798 209
 Location: Victoria Falls, Zimbabwe`,
   },
 ];
