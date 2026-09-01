@@ -45,6 +45,7 @@ export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -53,10 +54,24 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    await new Promise(r => setTimeout(r, 1000));
-    setSubmitted(true);
-    setSubmitting(false);
-    setForm({ name: '', email: '', subject: '', message: '' });
+    setError('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || 'Failed to send message');
+      }
+      setSubmitted(true);
+      setForm({ name: '', email: '', subject: '', message: '' });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -87,7 +102,7 @@ export default function ContactPage() {
       <section className="py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {contactMethods.map(({ icon: Icon, label, value, href, description }, i) => (
+            {contactMethods.map(({ icon: Icon, label, value, href, description, primary }, i) => (
               <motion.a
                 key={label}
                 href={href}
@@ -97,14 +112,31 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className="group bg-apple-light rounded-3xl p-8 text-center hover:bg-white hover:shadow-lg transition-all duration-300"
+                className={
+                  primary
+                    ? 'group bg-[#25D366] rounded-3xl p-8 text-center hover:bg-[#20bd5a] shadow-[0_8px_32px_rgba(37,211,102,0.25)] transition-all duration-300'
+                    : label === 'Email'
+                      ? 'group bg-apple-light rounded-3xl p-8 text-center hover:bg-white hover:shadow-lg transition-all duration-300 opacity-80'
+                      : 'group bg-apple-light rounded-3xl p-8 text-center hover:bg-white hover:shadow-lg transition-all duration-300'
+                }
               >
-                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-apple-blue group-hover:scale-110 transition-all duration-300">
-                  <Icon className="w-6 h-6 text-apple-blue group-hover:text-white transition-colors" strokeWidth={1.5} />
+                <div
+                  className={
+                    primary
+                      ? 'w-14 h-14 bg-white rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-all duration-300'
+                      : 'w-14 h-14 bg-white rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-apple-blue group-hover:scale-110 transition-all duration-300'
+                  }
+                >
+                  <Icon
+                    className={primary ? 'w-6 h-6 text-[#25D366] transition-colors' : 'w-6 h-6 text-apple-blue group-hover:text-white transition-colors'}
+                    strokeWidth={1.5}
+                  />
                 </div>
-                <p className="text-xs font-semibold tracking-[0.15em] uppercase text-apple-gray mb-2">{label}</p>
-                <p className="font-semibold text-apple-dark mb-1">{value}</p>
-                <p className="text-sm text-apple-gray">{description}</p>
+                <p className={`text-xs font-semibold tracking-[0.15em] uppercase mb-2 ${primary ? 'text-green-100' : 'text-apple-gray'}`}>
+                  {primary ? 'Recommended' : label}
+                </p>
+                <p className={`font-semibold mb-1 ${primary ? 'text-white' : 'text-apple-dark'}`}>{value}</p>
+                <p className={`text-sm ${primary ? 'text-green-50/90' : 'text-apple-gray'}`}>{description}</p>
               </motion.a>
             ))}
           </div>
@@ -211,6 +243,9 @@ export default function ContactPage() {
                     )}
                     {submitting ? 'Sending...' : 'Send Message'}
                   </button>
+                  {error && (
+                    <p className="text-sm text-red-500">{error}</p>
+                  )}
                 </form>
               )}
             </motion.div>
@@ -235,6 +270,14 @@ export default function ContactPage() {
                   <p className="text-sm text-green-100">Get instant responses from our team</p>
                 </div>
               </a>
+
+              <p className="text-xs text-apple-gray px-1">
+                Prefer email?{' '}
+                <a href="mailto:info@apparelounge.co.zw" className="text-apple-blue hover:underline">
+                  info@apparelounge.co.zw
+                </a>
+                {' '}— we respond faster on WhatsApp.
+              </p>
 
               <div className="bg-white rounded-3xl p-8">
                 <h3 className="font-semibold text-apple-dark text-lg mb-5">Business Hours</h3>
